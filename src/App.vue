@@ -1,10 +1,23 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Characters</router-link> |
+    <router-link to="/favorite">Favourites</router-link>
   </div>
+  <div class="favourite-count">Count: {{ favourites.length }}</div>
   <router-view />
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import { mapGetters } from "vuex";
+
+export default defineComponent({
+  methods: {},
+  computed: {
+    ...mapGetters(["favourites"]),
+  },
+});
+</script>
 
 <style>
 #app {
