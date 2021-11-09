@@ -1,9 +1,12 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Characters</router-link> |
-    <router-link to="/favorite">Favourites</router-link>
+  <div id="nav" class="navigation">
+    <div>
+      <router-link to="/">Characters</router-link> |
+      <router-link to="/favourites">Favourites</router-link>
+    </div>
+    <div class="favourite-count">Count: {{ favourites.length }}</div>
   </div>
-  <div class="favourite-count">Count: {{ favourites.length }}</div>
+
   <router-view />
 </template>
 
@@ -20,6 +23,9 @@ export default defineComponent({
 </script>
 
 <style>
+a {
+  text-decoration: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -34,10 +40,16 @@ export default defineComponent({
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #989898;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: white;
+}
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  background: #202020;
+  color: white;
 }
 </style>

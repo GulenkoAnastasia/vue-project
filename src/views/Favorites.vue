@@ -1,9 +1,9 @@
 <template>
-  <div class="character-list">
+  <div class="favourites-list">
     <CharacterCard
-      :key="character.id"
-      v-for="character in characters"
-      :character="character"
+      v-for="favourite in favourites"
+      :key="favourite.id"
+      :character="favourite"
     ></CharacterCard>
   </div>
 </template>
@@ -14,10 +14,9 @@ import { mapGetters } from "vuex";
 import CharacterCard from "../components/CharacterCard.vue";
 
 export default defineComponent({
-  name: "CharacterList",
-  methods: {},
+  name: "Favourites",
   computed: {
-    ...mapGetters(["characters"]),
+    ...mapGetters(["favourites"]),
   },
   components: {
     CharacterCard,
@@ -26,9 +25,8 @@ export default defineComponent({
 </script>
 
 <style>
-.character-list {
+.favourites-list {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   padding-top: 30px;
 }
