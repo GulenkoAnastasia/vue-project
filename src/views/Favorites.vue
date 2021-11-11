@@ -29,5 +29,6 @@ export default defineComponent({
   display: flex;
   justify-content: space-around;
   padding-top: 30px;
+  flex-wrap: wrap;
 }
 </style>

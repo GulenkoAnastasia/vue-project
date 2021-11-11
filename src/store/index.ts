@@ -16,41 +16,22 @@ const store = createStore({
   },
   actions: {
     async loadListCharacters({ commit }, event) {
-      try {
-        const response = await fetch(
-          "https://rickandmortyapi.com/api/character"
-        );
-        const users = await response.json();
+      let response = await fetch("https://rickandmortyapi.com/api/character");
 
-        if (event) {
-          switch (event.target.value) {
-            case "Human":
-              users.results = users.results.filter(
-                (character: CharacterInfo) => {
-                  return character.species === "Human";
-                }
-              );
-              break;
-            case "Alien":
-              users.results = users.results.filter(
-                (character: CharacterInfo) => {
-                  return character.species === "Alien";
-                }
-              );
-              break;
-            case "Animal":
-              users.results = users.results.filter(
-                (character: CharacterInfo) => {
-                  return character.species === "Animal";
-                }
-              );
-              break;
-          }
+      if (event) {
+        if (event.type === "click" && event.target.value !== "All") {
+          response = await fetch(
+            `https://rickandmortyapi.com/api/character/?species=${event.target.value}`
+          );
         }
-        commit("setCharacters", users.results);
-      } catch (err) {
-        console.log(err);
+        if (event.type === "submit") {
+          response = await fetch(
+            `https://rickandmortyapi.com/api/character/?name=${event.target["name"].value}`
+          );
+        }
       }
+      const users = await response.json();
+      commit("setCharacters", users.results);
     },
     addFavourites({ commit }, params) {
       const favourites = JSON.parse(localStorage.getItem("favourite") || "[]");
@@ -78,9 +59,6 @@ const store = createStore({
     favourites(state) {
       return state.favourites;
     },
-    // filtered(state) {
-    //   return state.filtered;
-    // },
   },
 });
 

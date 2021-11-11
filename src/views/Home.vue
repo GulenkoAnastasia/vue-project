@@ -1,12 +1,21 @@
 <template>
   <div class="filtration-section">
     <FilterButton
-      v-on:click="handleClick"
+      @click="loadListCharacters($event), handleClick($event)"
       v-for="name in buttonNames"
       :key="name"
       :text="name"
-      :classs="isActive"
+      :className="name === isActive ? 'active' : 'disable'"
     ></FilterButton>
+    <form @submit="handleSubmit" class="search">
+      <input
+        class="search-input"
+        type="search"
+        placeholder="Search by name..."
+        name="name"
+      />
+      <button type="submit" class="search-button">search</button>
+    </form>
   </div>
   <CharacterList></CharacterList>
 </template>
@@ -22,6 +31,7 @@ export default defineComponent({
   data() {
     return {
       buttonNames: ["All", "Human", "Animal", "Alien"],
+      isActive: "All",
     };
   },
   computed: {
@@ -29,8 +39,14 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(["loadListCharacters"]),
-    handleClick(event: any) {
+
+    handleSubmit(event: Event) {
+      event.preventDefault();
       this.loadListCharacters(event);
+    },
+
+    handleClick(event: { target: HTMLInputElement }) {
+      this.isActive = event.target.value;
     },
   },
   created() {
@@ -48,5 +64,16 @@ export default defineComponent({
   padding: 30px;
   display: flex;
   background: lightgray;
+}
+
+.search {
+  margin-left: 20px;
+}
+.search-input {
+  outline: none;
+  padding: 5px 10px;
+}
+.search-button {
+  padding: 5px 10px;
 }
 </style>
