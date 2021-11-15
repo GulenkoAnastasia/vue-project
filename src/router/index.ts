@@ -6,6 +6,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: Home,
+    props: (route) => ({
+      page: Number(route.query.page) || 1,
+      species: route.query.species || "",
+      name: route.query.name || "",
+    }),
   },
   {
     path: "/favourites",

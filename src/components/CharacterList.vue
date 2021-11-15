@@ -15,6 +15,11 @@ import CharacterCard from "../components/CharacterCard.vue";
 
 export default defineComponent({
   name: "CharacterList",
+  data() {
+    return {
+      className: "detail",
+    };
+  },
   computed: {
     ...mapGetters(["characters"]),
   },

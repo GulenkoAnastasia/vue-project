@@ -15,21 +15,10 @@ const store = createStore({
     },
   },
   actions: {
-    async loadListCharacters({ commit }, event) {
-      let response = await fetch("https://rickandmortyapi.com/api/character");
+    async loadListCharacters({ commit }, { page, species, name }) {
+      const url = `https://rickandmortyapi.com/api/character/?page=${page}&species=${species}&name=${name}`;
 
-      if (event) {
-        if (event.type === "click" && event.target.value !== "All") {
-          response = await fetch(
-            `https://rickandmortyapi.com/api/character/?species=${event.target.value}`
-          );
-        }
-        if (event.type === "submit") {
-          response = await fetch(
-            `https://rickandmortyapi.com/api/character/?name=${event.target["name"].value}`
-          );
-        }
-      }
+      const response = await fetch(url);
       const users = await response.json();
       commit("setCharacters", users.results);
     },

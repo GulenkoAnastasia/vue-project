@@ -6,7 +6,6 @@
     </div>
     <div class="favourite-count">Count: {{ favourites.length }}</div>
   </div>
-
   <router-view />
 </template>
 
@@ -15,7 +14,6 @@ import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 
 export default defineComponent({
-  methods: {},
   computed: {
     ...mapGetters(["favourites"]),
   },
@@ -25,6 +23,7 @@ export default defineComponent({
 <style>
 a {
   text-decoration: none;
+  color: black;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

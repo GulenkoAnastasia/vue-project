@@ -1,11 +1,12 @@
 <template>
-  <div class="favourites-list">
+  <div class="favourites-list" v-if="favourites.length">
     <CharacterCard
       v-for="favourite in favourites"
       :key="favourite.id"
       :character="favourite"
     ></CharacterCard>
   </div>
+  <div class="no-cards" v-else>no cards</div>
 </template>
 
 <script lang="ts">
@@ -30,5 +31,9 @@ export default defineComponent({
   justify-content: space-around;
   padding-top: 30px;
   flex-wrap: wrap;
+}
+.no-cards {
+  margin-top: 50px;
+  font-size: 22px;
 }
 </style>

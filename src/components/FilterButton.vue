@@ -1,5 +1,17 @@
 <template>
-  <input @click="handleClick" type="button" :value="text" :class="className" />
+  <router-link
+    :to="{ name: 'Home', query: { species: text.toLowerCase() } }"
+    v-if="text !== 'All'"
+  >
+    <button :class="className">
+      {{ text }}
+    </button>
+  </router-link>
+  <router-link :to="{ name: 'Home' }" v-else>
+    <button :class="className">
+      {{ text }}
+    </button></router-link
+  >
 </template>
 
 <script lang="ts">
@@ -14,15 +26,13 @@ export default defineComponent({
 <style>
 .disable {
   background: lightgray;
-  padding: 5px 10px;
-  outline: none;
-}
-.button:hover {
-  background: #202020;
-  color: white;
 }
 .active {
   background: #202020;
   color: white;
+}
+
+.btn {
+  padding: 5px 10px;
 }
 </style>
